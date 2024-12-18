@@ -1,0 +1,13 @@
+<sly data-sly-use.books="com.aem.prepare.core.models.AuthorBooks"></sly>
+<h1>${books.authorName} Books</h1>
+
+=======================BOOK DETAILS WITH Nested Multifield=========================
+<sly data-sly-list.item=${books.bookDetailsWithNestedMultifield}>
+	------Book:${itemList.count}---------
+	<p>Book Name : <b>${item.bookName}</b></p>
+	<p>Book Subject : <b>${item.bookSubject}</b></p>
+	<sly data-sly-list.edition=${item.bookEditions}>
+	<p>Book Edition : <b>${edition.bookEdition}</b></p>
+	<p>Publish Date : <b>${'MMM dd,yyyy' @ format=item.editionDate}</b></p>
+	</sly>
+</sly>

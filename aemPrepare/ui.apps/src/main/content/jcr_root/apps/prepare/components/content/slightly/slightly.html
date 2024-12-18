@@ -1,0 +1,71 @@
+<div id="html-attribute" class="aem">
+<p>using html attribute</p>
+</div>
+
+<div id="slightly-attribute" data-sly-attribute.class="aem">
+<p>using sightly attribute</p>
+</div>
+
+<div id="html-attribute" class="">
+<p>using html attribute</p>
+</div>
+
+<div id="slightly-attribute" data-sly-attribute.class="">
+<p>using sightly attribute</p>
+</div>
+
+<div>properties: <b>${properties.authorname}</b></div>
+<div>pageProperties: <b>${pageProperties.jcr:title}</b></div>
+<div>inheritedPageProperties: <b>${inheritedPageProperties['jcr:title']}</b></div>
+
+
+
+<div>compoent: <b>${component['title']}</b></div>
+<div>compoent context: <b>${componentContext.page.title}</b></div>
+<div>Design Node: <b>${currentDesign.path}</b></div>
+<div>current Node: <b>${currentNode.path}</b></div>
+<div>current Page: <b>${currentPage.path}</b></div>
+<div>resource: <b>${resource.path}</b></div>
+<div>resource page: <b>${resourcePage.path}</b></div>
+<div>resource Design: <b>${resourceDesign.path}</b></div>
+<div>WCMMODE => EDIT/PREVIEW: <b>${wcmmode.edit}/${wcmmode.preview}</b></div>
+
+
+<!-- context in slightly- slightly does not allow anything without defining context hence it avoids cross site scripting-->
+
+<div style="color:${'#00FFFF'};">
+<p>color do not apply</p>
+</div>
+
+<div style="color:${'#00FFFF' @ context='styleToken'};font-style:${'italic' @ context='styleToken'};font-family:${'Arial Helvetica, sans-serif' @ context='styleString'};">
+<p>color do apply</p>
+<p>${'<h1> Test HEML Context</h1>'}</p>
+<p>${'<h1> Test HEML Context</h1>' @ context='html'}</p>
+<p>${'455233' @ context='number'}</p>
+
+</div>
+
+<div>
+<script>
+	function testScriptContext(){
+    	var scripttoken = "${'scriptContextTest' @ context='scriptToken'}";
+        var scriptstring = "${'Script String for spaces and special characters' @ context='scriptString'}";
+        console.log("---------scriptcontest being tested------------"+scripttoken);
+        console.log("---------scriptcontest being tested------------"+scriptstring);
+
+        }
+
+</script>
+
+<input type="button" class="btn btn-info" onclick="${'testScriptContext' @ context='scriptToken'}()" value="check script context"/>
+</div>
+
+
+<!--
+<sly data-sly-use.htl="com.aem.prepare.core.models.AuthorBooks"></sly>
+
+<div data-sly-use.booksTemplate="templateslightlycall.html">
+	<sly data-sly-call="${booksTempalte.authorBooks @ books=htl}"></sly>
+    <sly data-sly-call="${booksTempalte.mapAttribute @ Attribute=htl.bookDetailsWithMap}"></sly>
+
+</div>-->
